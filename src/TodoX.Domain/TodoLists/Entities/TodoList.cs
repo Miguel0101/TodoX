@@ -1,3 +1,4 @@
+using TodoX.Domain.TodoItems.Entities;
 using TodoX.Domain.TodoLists.ValueObjects;
 using TodoX.Domain.Users.Entities;
 
@@ -12,4 +13,5 @@ public class TodoList
 
     // Navigation
     public User User { get; set; } = null!;
+    public List<TodoItem> TodoItems { get; set; } = [];
 }
