@@ -25,5 +25,12 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
                  .HasColumnName("Email")
                  .IsRequired();
         });
+
+        builder.OwnsOne(u => u.Password, password =>
+        {
+            password.Property(p => p.HashedValue)
+                    .HasColumnName("Password")
+                    .IsRequired();
+        });
     }
 }
