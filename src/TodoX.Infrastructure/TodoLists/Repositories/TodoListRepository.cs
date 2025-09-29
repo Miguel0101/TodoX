@@ -1,56 +1,55 @@
 using Microsoft.EntityFrameworkCore;
-using TodoX.Domain.Users.Entities;
-using TodoX.Domain.Users.Interfaces;
+using TodoX.Domain.TodoLists.Entities;
+using TodoX.Domain.TodoLists.Interfaces;
 using TodoX.Infrastructure.Data;
 
-namespace TodoX.Infrastructure.Users.Repositories;
+namespace TodoX.Infrastructure.TodoLists.Repositories;
 
-public class UserRepository : IUserRepository
+public class TodoListRepository : ITodoListRepository
 {
     private readonly AppDbContext _db;
 
-    public UserRepository(AppDbContext db)
+    public TodoListRepository(AppDbContext db)
     {
         _db = db;
     }
 
     #region [Queries]
 
-    public async Task<User?> GetByIdAsync(Guid id)
+    public async Task<TodoList?> GetByIdAsync(Guid id)
     {
-        return await _db.Users.FirstOrDefaultAsync(u => u.Id == id);
+        return await _db.TodoLists.FirstOrDefaultAsync(u => u.Id == id);
     }
 
-    public async Task<List<User>> GetListAsync()
+    public async Task<List<TodoList>> GetListAsync()
     {
-        return await _db.Users.ToListAsync();
+        return await _db.TodoLists.ToListAsync();
     }
 
     #endregion
 
     #region [Commands]
 
-    public async Task AddAsync(User user)
+    public async Task AddAsync(TodoList todoList)
     {
-        await _db.Users.AddAsync(user);
+        await _db.TodoLists.AddAsync(todoList);
         await _db.SaveChangesAsync();
     }
 
-    public async Task EditAsync(Guid id, User user)
+    public async Task EditAsync(Guid id, TodoList todoList)
     {
-        User? userEntity = await GetByIdAsync(id) ?? throw new NullReferenceException("The user doesn't exist.");
+        TodoList? todoListEntity = await GetByIdAsync(id) ?? throw new NullReferenceException("The todo list doesn't exist.");
 
-        userEntity.Name = user.Name;
-        userEntity.Email = user.Email;
+        todoListEntity.Title = todoList.Title;
 
         await _db.SaveChangesAsync();
     }
 
     public async Task RemoveAsync(Guid id)
     {
-        User? userEntity = await GetByIdAsync(id) ?? throw new NullReferenceException("The user doesn't exist.");
+        TodoList? todoListEntity = await GetByIdAsync(id) ?? throw new NullReferenceException("The todo list doesn't exist.");
 
-        _db.Remove(userEntity);
+        _db.Remove(todoListEntity);
         await _db.SaveChangesAsync();
     }
 

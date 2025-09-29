@@ -1,13 +1,13 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using TodoX.Domain.TodoLists.Entities;
-using TodoX.Domain.TodoLists.ValueObjects;
+using TodoX.Domain.TodoItems.Entities;
+using TodoX.Domain.TodoItems.ValueObjects;
 
-namespace TodoX.Infrastructure.TodoLists.Configurations;
+namespace TodoX.Infrastructure.TodoItems.Configurations;
 
-public class TodoListConfiguration : IEntityTypeConfiguration<TodoList>
+public class TodoListConfiguration : IEntityTypeConfiguration<TodoItem>
 {
-    public void Configure(EntityTypeBuilder<TodoList> builder)
+    public void Configure(EntityTypeBuilder<TodoItem> builder)
     {
         builder.HasKey(t => t.Id);
 
@@ -17,6 +17,10 @@ public class TodoListConfiguration : IEntityTypeConfiguration<TodoList>
                 .HasColumnName("Title")
                 .IsRequired()
                 .HasMaxLength(Title.MaxLength);
+        });
+
+        builder.OwnsOne(d => d.Description, description =>
+        {
         });
     }
 }
