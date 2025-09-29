@@ -1,0 +1,26 @@
+TodoX ROADMAP
+
+- API endpoints
+  - Users
+    - /api/user/register                          -> POST
+    - /api/user/login                             -> POST
+    - /api/user/me                                -> GET
+
+  - Todo lists
+    - /api/todolists                              -> GET
+    - /api/todolists/{id}                         -> GET
+    - /api/todolists                              -> POST
+    - /api/todolists/{id}                         -> PUT
+    - /api/todolists/{id}                         -> DELETE
+
+  - Todo items
+    - /api/todolists/{listId}/items               -> GET
+    - /api/todolists/{listId}/items/{id}          -> GET
+    - /api/todolists/{listId}/items               -> POST
+    - /api/todolists/{listId}/items/{id}          -> PUT
+    - /api/todolists/{listId}/items/{id}/complete -> PATCH
+    - /api/todolists/{listId}/items/{id}          -> DELETE
+
+- Entity Relationships
+  - User     1:0-N TodoList
+  - TodoList 1:0-N TodoItem
