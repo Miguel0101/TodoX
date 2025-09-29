@@ -6,7 +6,7 @@ public interface IUserRepository
 {
     #region [Queries]
 
-    Task<User> GetByIdAsync(Guid id);
+    Task<User?> GetByIdAsync(Guid id);
     Task<List<User>> GetListAsync();
 
     #endregion

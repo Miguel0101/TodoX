@@ -21,7 +21,7 @@ public record Email
         }
         catch
         {
-            throw new ArgumentException("Invalid mail address.");
+            throw new ArgumentException("Invalid mail address.", nameof(value));
         }
 
         return new Email(value);

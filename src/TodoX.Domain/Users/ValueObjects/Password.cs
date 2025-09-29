@@ -6,11 +6,13 @@ public record Password
 {
     public static int MinLength { get; } = 8;
 
-    public string Value { get; set; } = string.Empty;
+    public string HashedValue { get; } = string.Empty;
 
-    private Password(string value)
+    private static readonly PasswordHasher<string?> Hasher = new();
+
+    private Password(string hashedValue)
     {
-        Value = value;
+        HashedValue = hashedValue;
     }
 
     public static Password Create(string value)
@@ -21,9 +23,13 @@ public record Password
         if (value.Length < MinLength)
             throw new ArgumentOutOfRangeException(nameof(value), $"The password must be at least {MinLength} characters");
 
-        var hasher = new PasswordHasher<Password>();
-        var hashed = hasher.HashPassword()
+        string hashed = Hasher.HashPassword(null, value);
 
-        return new Password(value);
+        return new Password(hashed);
+    }
+
+    public bool Verify(string password)
+    {
+        return Hasher.VerifyHashedPassword(null, HashedValue, password) != PasswordVerificationResult.Failed;
     }
 }
