@@ -1,5 +1,6 @@
 using System.Security.Claims;
 using TodoX.Application.Common.Interfaces;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace TodoX.Application.Common.Services;
 
@@ -9,7 +10,7 @@ public class TokenService : ITokenService
     {
         List<Claim> claims =
         [
-            new Claim(ClaimTypes.NameIdentifier, email),
+            new Claim(JwtRegisteredClaimNames.Sub, id.ToString()),
         ];
     }
 }
