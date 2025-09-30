@@ -5,7 +5,7 @@ using TodoX.Domain.TodoItems.ValueObjects;
 
 namespace TodoX.Infrastructure.TodoItems.Configurations;
 
-public class TodoListConfiguration : IEntityTypeConfiguration<TodoItem>
+public class TodoItemConfiguration : IEntityTypeConfiguration<TodoItem>
 {
     public void Configure(EntityTypeBuilder<TodoItem> builder)
     {
@@ -21,6 +21,17 @@ public class TodoListConfiguration : IEntityTypeConfiguration<TodoItem>
 
         builder.OwnsOne(d => d.Description, description =>
         {
+            description.Property(d => d.Value)
+                       .HasColumnName("Description")
+                       .IsRequired()
+                       .HasMaxLength(Description.MaxLength);
+        });
+
+        builder.OwnsOne(c => c.Completed, completed =>
+        {
+            completed.Property(c => c.Value)
+                     .HasColumnName("Completed")
+                     .IsRequired();
         });
     }
 }

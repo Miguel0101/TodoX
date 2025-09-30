@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using TodoX.Domain.TodoItems.Entities;
 using TodoX.Domain.TodoLists.Entities;
 using TodoX.Domain.Users.Entities;
+using TodoX.Infrastructure.TodoItems.Configurations;
 using TodoX.Infrastructure.TodoLists.Configurations;
 using TodoX.Infrastructure.Users.Configurations;
 
@@ -9,7 +10,7 @@ namespace TodoX.Infrastructure.Data;
 
 public class AppDbContext : DbContext
 {
-    public AppDbContext(DbContextOptions options) : base(options) { }
+    public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
     public DbSet<User> Users { get; set; }
     public DbSet<TodoList> TodoLists { get; set; }
