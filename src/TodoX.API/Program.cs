@@ -1,8 +1,15 @@
+using Microsoft.EntityFrameworkCore;
+using TodoX.Infrastructure;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Services
 builder.Services.AddOpenApi();
 builder.Services.AddControllers();
+builder.Services.AddInfrastructure(options =>
+{
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DbCredentials"));
+});
 
 var app = builder.Build();
 

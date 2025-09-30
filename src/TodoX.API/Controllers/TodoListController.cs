@@ -7,7 +7,7 @@ namespace TodoX.API.Controllers;
 public class TodoListController : ControllerBase
 {
     [HttpGet]
-    public IActionResult GetTodos()
+    public IActionResult GetList()
     {
         return Ok();
     }
