@@ -22,5 +22,5 @@ TodoX ROADMAP
     - /api/todolists/{listId}/items/{id}          -> DELETE
 
 - Entity Relationships
-  - User     1:0-N TodoList
-  - TodoList 1:0-N TodoItem
+  - User     1 : 0-N TodoList
+  - TodoList 1 : 0-N TodoItem
