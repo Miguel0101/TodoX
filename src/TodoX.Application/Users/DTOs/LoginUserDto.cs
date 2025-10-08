@@ -1,7 +1,7 @@
 namespace TodoX.Application.Users.DTOs;
 
-public class UpdateUserDto
+public class LoginUserDto
 {
-    public string? Name { get; set; }
     public string? Email { get; set; }
+    public string? Password { get; set; }
 }

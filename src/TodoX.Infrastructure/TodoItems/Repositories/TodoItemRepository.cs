@@ -18,12 +18,17 @@ public class TodoItemRepository : ITodoItemRepository
 
     public async Task<TodoItem?> GetByIdAsync(Guid id)
     {
-        return await _db.TodoItems.FirstOrDefaultAsync(u => u.Id == id);
+        return await _db.TodoItems
+            .Include(t => t.TodoList)
+            .FirstOrDefaultAsync(t => t.Id == id);
     }
 
-    public async Task<List<TodoItem>> GetListAsync()
+    public async Task<List<TodoItem>> GetByListIdAsync(Guid todoListId)
     {
-        return await _db.TodoItems.ToListAsync();
+        return await _db.TodoItems
+            .Include(t => t.TodoList)
+            .Where(t => t.TodoListId == todoListId)
+            .ToListAsync();
     }
 
     #endregion
@@ -36,9 +41,9 @@ public class TodoItemRepository : ITodoItemRepository
         await _db.SaveChangesAsync();
     }
 
-    public async Task EditAsync(Guid id, TodoItem todoItem)
+    public async Task EditAsync(TodoItem todoItem)
     {
-        TodoItem? todoItemEntity = await GetByIdAsync(id) ?? throw new NullReferenceException("The todo item doesn't exist.");
+        TodoItem todoItemEntity = await GetByIdAsync(todoItem.Id) ?? throw new NullReferenceException("The todo item doesn't exist.");
 
         todoItemEntity.Title = todoItem.Title;
         todoItemEntity.Description = todoItem.Description;
@@ -48,7 +53,7 @@ public class TodoItemRepository : ITodoItemRepository
 
     public async Task RemoveAsync(Guid id)
     {
-        TodoItem? todoItemEntity = await GetByIdAsync(id) ?? throw new NullReferenceException("The todo item doesn't exist.");
+        TodoItem todoItemEntity = await GetByIdAsync(id) ?? throw new NullReferenceException("The todo item doesn't exist.");
 
         _db.Remove(todoItemEntity);
         await _db.SaveChangesAsync();

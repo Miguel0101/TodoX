@@ -36,9 +36,9 @@ public class TodoListRepository : ITodoListRepository
         await _db.SaveChangesAsync();
     }
 
-    public async Task EditAsync(Guid id, TodoList todoList)
+    public async Task EditAsync(TodoList todoList)
     {
-        TodoList? todoListEntity = await GetByIdAsync(id) ?? throw new NullReferenceException("The todo list doesn't exist.");
+        TodoList todoListEntity = await _db.TodoLists.FindAsync(todoList.Id) ?? throw new NullReferenceException("The todo list doesn't exist.");
 
         todoListEntity.Title = todoList.Title;
 
@@ -47,7 +47,7 @@ public class TodoListRepository : ITodoListRepository
 
     public async Task RemoveAsync(Guid id)
     {
-        TodoList? todoListEntity = await GetByIdAsync(id) ?? throw new NullReferenceException("The todo list doesn't exist.");
+        TodoList todoListEntity = await _db.TodoLists.FindAsync(id) ?? throw new NullReferenceException("The todo list doesn't exist.");
 
         _db.Remove(todoListEntity);
         await _db.SaveChangesAsync();

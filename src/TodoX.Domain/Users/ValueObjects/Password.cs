@@ -32,4 +32,10 @@ public record Password
     {
         return Hasher.VerifyHashedPassword(null, HashedValue, password) != PasswordVerificationResult.Failed;
     }
+
+    public static Password FromHash(string hashedValue)
+    {
+        return new Password(hashedValue);
+    }
+
 }

@@ -7,14 +7,14 @@ public interface ITodoItemRepository
     #region [Queries]
 
     Task<TodoItem?> GetByIdAsync(Guid id);
-    Task<List<TodoItem>> GetListAsync();
+    Task<List<TodoItem>> GetByListIdAsync(Guid todoListId);
 
     #endregion
 
     #region [Commands]
 
     Task AddAsync(TodoItem todoItem);
-    Task EditAsync(Guid id, TodoItem todoItem);
+    Task EditAsync(TodoItem todoItem);
     Task RemoveAsync(Guid id);
 
     #endregion

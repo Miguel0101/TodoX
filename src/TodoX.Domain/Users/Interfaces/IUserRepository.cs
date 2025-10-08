@@ -1,4 +1,5 @@
 using TodoX.Domain.Users.Entities;
+using TodoX.Domain.Users.ValueObjects;
 
 namespace TodoX.Domain.Users.Interfaces;
 
@@ -6,6 +7,7 @@ public interface IUserRepository
 {
     #region [Queries]
 
+    Task<User?> FindAsync(Email email);
     Task<User?> GetByIdAsync(Guid id);
     Task<List<User>> GetListAsync();
 

@@ -4,7 +4,7 @@ TodoX ROADMAP
   - Users
     - /api/user/register                          -> POST
     - /api/user/login                             -> POST
-    - /api/user/me                                -> GET
+    - /api/user                                   -> GET
 
   - Todo lists
     - /api/todolists                              -> GET

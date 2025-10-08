@@ -11,26 +11,20 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
     {
         builder.HasKey(u => u.Id);
 
-        builder.OwnsOne(u => u.Name, name =>
-        {
-            name.Property(n => n.Value)
-                .HasColumnName("Name")
-                .IsRequired()
-                .HasMaxLength(Name.MaxLength);
-        });
+        builder.Property(e => e.Name)
+               .HasConversion(name => name!.Value, value => Name.Create(value))
+               .HasColumnName("Name")
+               .IsRequired()
+               .HasMaxLength(Name.MaxLength);
 
-        builder.OwnsOne(u => u.Email, email =>
-        {
-            email.Property(e => e.Value)
-                 .HasColumnName("Email")
-                 .IsRequired();
-        });
+        builder.Property(e => e.Email)
+               .HasConversion(email => email!.Value, value => Email.Create(value))
+               .HasColumnName("Email")
+               .IsRequired();
 
-        builder.OwnsOne(u => u.Password, password =>
-        {
-            password.Property(p => p.HashedValue)
-                    .HasColumnName("Password")
-                    .IsRequired();
-        });
+        builder.Property(e => e.Password)
+               .HasConversion(password => password!.HashedValue, hashed => Password.FromHash(hashed))
+               .HasColumnName("Password")
+               .IsRequired();
     }
 }

@@ -2,9 +2,11 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TodoX.Domain\TodoX.Domain.csproj" />
+    <ProjectReference Include="..\TodoX.Application\TodoX.Application.csproj" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.9" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.9" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.9">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

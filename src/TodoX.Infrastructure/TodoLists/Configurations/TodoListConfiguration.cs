@@ -11,12 +11,10 @@ public class TodoListConfiguration : IEntityTypeConfiguration<TodoList>
     {
         builder.HasKey(t => t.Id);
 
-        builder.OwnsOne(t => t.Title, title =>
-        {
-            title.Property(t => t.Value)
-                .HasColumnName("Title")
-                .IsRequired()
-                .HasMaxLength(Title.MaxLength);
-        });
+        builder.Property(t => t.Title)
+               .HasConversion(title => title!.Value, value => Title.Create(value))
+               .HasColumnName("Title")
+               .IsRequired()
+               .HasMaxLength(Title.MaxLength);
     }
 }

@@ -2,3 +2,46 @@ services:
   db:
     container_name: todox-db
     image: postgres:alpine
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  web_api:
+    container_name: todox-api
+    build:
+      context: .
+      dockerfile: ./src/TodoX.API/Dockerfile
+    depends_on:
+      - db
+    environment:
+      - ConnectionStrings__DbCredentials=Host=db;Database=${POSTGRES_DB};Username=${POSTGRES_USER};Password=${POSTGRES_PASSWORD}
+      - JwtConfiguration__Issuer=${JWT_ISSUER}
+      - JwtConfiguration__Audience=${JWT_AUDIENCE}
+      - JwtConfiguration__PrivateKey=${JWT_PRIVATE_KEY}
+      - JwtConfiguration__Lifetime=${JWT_LIFETIME}
+    volumes:
+      - migrations_data:/src/TodoX.Infrastructure/Migrations
+    ports:
+      - "6789:6789"
+
+  migration:
+    build:
+      context: .
+      dockerfile: ./src/TodoX.API/Migration.Dockerfile
+      target: build
+    environment:
+      - ConnectionStrings__DbCredentials=Host=db;Database=${POSTGRES_DB};Username=${POSTGRES_USER};Password=${POSTGRES_PASSWORD}
+    volumes:
+      - migrations_data:/src/TodoX.Infrastructure/Migrations
+    command: /bin/sh -c "dotnet ef database update --project src/TodoX.Infrastructure --startup-project src/TodoX.API"
+    depends_on:
+      - db
+
+volumes:
+  db_data:
+  migrations_data:

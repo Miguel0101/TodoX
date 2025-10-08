@@ -11,27 +11,21 @@ public class TodoItemConfiguration : IEntityTypeConfiguration<TodoItem>
     {
         builder.HasKey(t => t.Id);
 
-        builder.OwnsOne(t => t.Title, title =>
-        {
-            title.Property(t => t.Value)
-                .HasColumnName("Title")
-                .IsRequired()
-                .HasMaxLength(Title.MaxLength);
-        });
+        builder.Property(t => t.Title)
+               .HasConversion(title => title!.Value, value => Title.Create(value))
+               .HasColumnName("Title")
+               .IsRequired()
+               .HasMaxLength(Title.MaxLength);
 
-        builder.OwnsOne(d => d.Description, description =>
-        {
-            description.Property(d => d.Value)
-                       .HasColumnName("Description")
-                       .IsRequired()
-                       .HasMaxLength(Description.MaxLength);
-        });
+        builder.Property(d => d.Description)
+               .HasConversion(description => description!.Value, value => Description.Create(value))
+               .HasColumnName("Description")
+               .IsRequired()
+               .HasMaxLength(Description.MaxLength);
 
-        builder.OwnsOne(c => c.Completed, completed =>
-        {
-            completed.Property(c => c.Value)
-                     .HasColumnName("Completed")
-                     .IsRequired();
-        });
+        builder.Property(c => c.Completed)
+               .HasConversion(completed => completed!.Value, value => Completed.Create(value))
+               .HasColumnName("Completed")
+               .IsRequired();
     }
 }

@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TodoX.Application\TodoX.Application.csproj" />
+    <ProjectReference Include="..\TodoX.Infrastructure\TodoX.Infrastructure.csproj" />
     <ProjectReference Include="..\TodoX.Domain\TodoX.Domain.csproj" />
   </ItemGroup>
 

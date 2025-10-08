@@ -14,7 +14,7 @@ public interface ITodoListRepository
     #region [Commands]
 
     Task AddAsync(TodoList todoList);
-    Task EditAsync(Guid id, TodoList todoList);
+    Task EditAsync(TodoList todoList);
     Task RemoveAsync(Guid id);
 
     #endregion

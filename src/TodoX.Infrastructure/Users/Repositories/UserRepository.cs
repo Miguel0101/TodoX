@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using TodoX.Domain.Users.Entities;
 using TodoX.Domain.Users.Interfaces;
+using TodoX.Domain.Users.ValueObjects;
 using TodoX.Infrastructure.Data;
 
 namespace TodoX.Infrastructure.Users.Repositories;
@@ -15,6 +16,11 @@ public class UserRepository : IUserRepository
     }
 
     #region [Queries]
+
+    public async Task<User?> FindAsync(Email email)
+    {
+        return await _db.Users.FirstOrDefaultAsync(u => u.Email == email);
+    }
 
     public async Task<User?> GetByIdAsync(Guid id)
     {

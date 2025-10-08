@@ -5,7 +5,7 @@ namespace TodoX.Application.Users.Services;
 
 public interface IUserService
 {
-    Task<ResultDto> Login();
-    Task<UserResponseDto> Register(CreateUserDto user);
-    Task<UserResponseDto> Update(UpdateUserDto user);
+    Task<ResponseDto<TokenDto>> Login(LoginUserDto userDto);
+    Task<ResponseDto<UserDto>> Register(CreateUserDto userDto);
+    Task<ResponseDto<UserDto>> Details(Guid id);
 }

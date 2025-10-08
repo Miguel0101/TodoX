@@ -4,5 +4,11 @@ public enum ErrorCode
 {
     Success = 0,
     UserNotFound,
-    InvalidPassword
+    UserAlreadyExists,
+    InvalidField,
+    InvalidPassword,
+    TodoListNotFound,
+    TodoItemNotFound,
+    Unauthorized,
+    UndefinedError
 }
