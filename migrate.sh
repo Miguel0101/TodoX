@@ -1,10 +1,9 @@
 #!/bin/bash
 
-# Caminhos dos projetos
+# Project paths
 INFRA_PROJ="src/TodoX.Infrastructure"
 API_PROJ="src/TodoX.API"
 
-# Pergunta o nome da migration
 read -p "Migration name: " MIGRATION_NAME
 
 # Verify if migration name is empty
@@ -13,11 +12,9 @@ if [ -z "$MIGRATION_NAME" ]; then
   exit 1
 fi
 
-# Executa o comando de migration
 echo "[!] Creating migration '$MIGRATION_NAME'..."
 dotnet ef migrations add "$MIGRATION_NAME" --project "$INFRA_PROJ" --startup-project "$API_PROJ"
 
-# Verifica se deu certo
 if [ $? -eq 0 ]; then
   echo "[!] Migration '$MIGRATION_NAME' created!"
 else
