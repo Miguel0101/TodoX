@@ -97,8 +97,8 @@ Authorization: Bearer YOUR_TOKEN_HERE
 | GET    | `/api/todolists/{listId}/items/{id}`               | Get a item in a list by id | ✅   |
 | POST   | `/api/todolists/{listId}/items`                   | Create a new item       | ✅   |
 | PUT  | `/api/todolists/{listId}/items/{id}` | Update a item   | ✅   |
-| PATCH  | `/api/todolists/{listId}/items/{itemId}/complete` | Mark item as complete   | ✅   |
-| DELETE | `/api/todolists/{listId}/items/{itemId}`          | Delete item             | ✅   |
+| PATCH  | `/api/todolists/{listId}/items/{id}/complete` | Mark item as complete   | ✅   |
+| DELETE | `/api/todolists/{listId}/items/{id}`          | Delete item             | ✅   |
 
 ---
 
