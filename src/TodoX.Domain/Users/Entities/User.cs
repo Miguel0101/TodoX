@@ -13,4 +13,5 @@ public class User
 
     // Navigation
     public List<TodoList> TodoLists { get; set; } = [];
+    public List<UserAccessToken> AccessTokens { get; set; } = [];
 }
