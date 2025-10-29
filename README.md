@@ -1,13 +1,13 @@
+![.NET](https://img.shields.io/badge/.NET-9.0-blue)
+![License: MIT](https://img.shields.io/badge/License-MIT-green)
+![Build](https://img.shields.io/github/actions/workflow/status/Miguel0101/TodoX/.github/workflows/dotnet.yml)
+![Docker](https://img.shields.io/badge/Docker-Ready-blue)
+
 # TodoX
 
 A modern RESTful API for managing to-do lists, built with **ASP.NET Core** and **Entity Framework Core**, following **Domain-Driven Design (DDD)** principles.
 
 ---
-
-![.NET](https://img.shields.io/badge/.NET-9.0-blue)
-![License: MIT](https://img.shields.io/badge/License-MIT-green)
-![Build](https://img.shields.io/github/actions/workflow/status/Miguel0101/TodoX/.github/workflows/dotnet.yml)
-![Docker](https://img.shields.io/badge/Docker-Ready-blue)
 
 ## Features
 
