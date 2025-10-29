@@ -13,6 +13,7 @@ public class AppDbContext : DbContext
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
     public DbSet<User> Users { get; set; }
+    public DbSet<UserAccessToken> UserAccessTokens { get; set; }
     public DbSet<TodoList> TodoLists { get; set; }
     public DbSet<TodoItem> TodoItems { get; set; }
 
@@ -21,6 +22,7 @@ public class AppDbContext : DbContext
         base.OnModelCreating(modelBuilder);
 
         modelBuilder.ApplyConfiguration(new UserConfiguration());
+        modelBuilder.ApplyConfiguration(new UserAccessTokenConfiguration());
         modelBuilder.ApplyConfiguration(new TodoListConfiguration());
         modelBuilder.ApplyConfiguration(new TodoItemConfiguration());
     }
