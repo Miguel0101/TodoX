@@ -1,4 +1,3 @@
-using System.Text.Json.Serialization;
 using Microsoft.EntityFrameworkCore;
 using TodoX.Application;
 using TodoX.Application.Common.Interfaces;
@@ -17,7 +16,8 @@ builder.WebHost.ConfigureKestrel(options =>
 });
 
 // Services
-builder.Services.AddOpenApi();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
 builder.Services.AddApplication();
 builder.Services.AddInfrastructure(jwtConfig, options =>
@@ -29,12 +29,8 @@ builder.Services.Configure<JwtConfiguration>(jwtSection);
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.MapOpenApi();
-}
-
+app.UseSwagger();
+app.UseSwaggerUI();
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
