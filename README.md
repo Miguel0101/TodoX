@@ -4,18 +4,19 @@ A modern RESTful API for managing to-do lists, built with **ASP.NET Core** and *
 
 ---
 
-## 🚀 Features
+## Features
 
-- ✅ User registration and authentication (JWT)
-- 🧾 Full CRUD for Todo Lists
-- 🗂️ Full CRUD for Todo Items
-- 🔒 Protected routes with JWT authentication
-- 🧱 Clean architecture with domain separation
-- 🐳 Docker & docker-compose support
+- User registration and authentication (JWT)
+- 2FA authentication
+- Full CRUD for Todo Lists
+- Full CRUD for Todo Items
+- Protected routes with JWT authentication
+- Clean architecture with domain separation
+- Docker & docker-compose support
 
 ---
 
-## 🧩 Project Structure
+## Project Structure
 
 ```
 TodoX/
@@ -32,7 +33,7 @@ TodoX/
 
 ---
 
-## 🛠️ Technologies
+## Technologies
 
 - **.NET 9.0**
 - **Entity Framework Core**
@@ -45,9 +46,9 @@ TodoX/
 
 ---
 
-## ⚙️ Setup and Run
+## Setup and Run
 
-### 🐳 Docker
+### Docker
 
 ```bash
 git clone https://github.com/Miguel0101/TodoX.git
@@ -56,9 +57,9 @@ docker compose up -d
 ```
 
 Once started, the API will be available at:  
-👉 **http://localhost:6789**
+**http://localhost:6789**
 
-## 🔑 JWT Authentication
+## JWT Authentication
 
 Authentication is handled using **Bearer Tokens (JWT)**.  
 After logging in, include your token in the `Authorization` header:
@@ -69,45 +70,48 @@ Authorization: Bearer YOUR_TOKEN_HERE
 
 ---
 
-## 📡 Main Endpoints
+## Main Endpoints
 
-### 👤 User
+### User
 
-| Method | Route                | Description               | Auth |
-|--------|----------------------|---------------------------|------|
-| POST   | `/api/user/register` | Register a new user       | ❌   |
-| POST   | `/api/user/login`    | Login and get JWT token   | ❌   |
-| GET    | `/api/user`       | Get logged user info      | ✅   |
+| Method | Route                | Description                   | Auth |
+| ------ | -------------------- | ----------------------------- | ---- |
+| POST   | `/api/auth/register` | Register a new user           | ❌   |
+| POST   | `/api/auth/login`    | Request a verification code   | ❌   |
+| POST   | `/api/auth/verify`   | Verify with verification code | ❌   |
+| GET    | `/api/auth`          | Get logged user info          | ✅   |
 
-### 🧾 Todo Lists
+### Todo Lists
 
-| Method | Route             | Description             | Auth |
-|--------|------------------|-------------------------|------|
-| GET    | `/api/todolists` | Get all todo lists      | ✅   |
-| GET    | `/api/todolists/{id}` | Get a todo list by id      | ✅   |
-| POST   | `/api/todolists` | Create a new todo list  | ✅   |
-| PUT    | `/api/todolists/{id}` | Update a list        | ✅   |
-| DELETE | `/api/todolists/{id}` | Delete a list        | ✅   |
+| Method | Route                 | Description            | Auth |
+| ------ | --------------------- | ---------------------- | ---- |
+| GET    | `/api/todolists`      | Get all todo lists     | ✅   |
+| GET    | `/api/todolists/{id}` | Get a todo list by id  | ✅   |
+| POST   | `/api/todolists`      | Create a new todo list | ✅   |
+| PUT    | `/api/todolists/{id}` | Update a list          | ✅   |
+| DELETE | `/api/todolists/{id}` | Delete a list          | ✅   |
 
-### 🗂️ Todo Items
+### Todo Items
 
-| Method | Route                                              | Description             | Auth |
-|--------|----------------------------------------------------|-------------------------|------|
-| GET    | `/api/todolists/{listId}/items`                   | Get all items in a list | ✅   |
-| GET    | `/api/todolists/{listId}/items/{id}`               | Get a item in a list by id | ✅   |
-| POST   | `/api/todolists/{listId}/items`                   | Create a new item       | ✅   |
-| PUT  | `/api/todolists/{listId}/items/{id}` | Update a item   | ✅   |
-| PATCH  | `/api/todolists/{listId}/items/{id}/complete` | Mark item as complete   | ✅   |
-| DELETE | `/api/todolists/{listId}/items/{id}`          | Delete item             | ✅   |
+| Method | Route                                         | Description                | Auth |
+| ------ | --------------------------------------------- | -------------------------- | ---- |
+| GET    | `/api/todolists/{listId}/items`               | Get all items in a list    | ✅   |
+| GET    | `/api/todolists/{listId}/items/{id}`          | Get a item in a list by id | ✅   |
+| POST   | `/api/todolists/{listId}/items`               | Create a new item          | ✅   |
+| PUT    | `/api/todolists/{listId}/items/{id}`          | Update a item              | ✅   |
+| PATCH  | `/api/todolists/{listId}/items/{id}/complete` | Mark item as complete      | ✅   |
+| DELETE | `/api/todolists/{listId}/items/{id}`          | Delete item                | ✅   |
 
 ---
 
-## 🧪 Quick Test with `curl`
+## Quick Test with `curl`
 
 ```bash
 curl -X POST http://localhost:6789/api/user/login -H "Content-Type: application/json" -d '{ "email": "admin@example.com", "password": "123456" }'
 ```
+
 #### JSON Result
+
 ```bash
 {
   "errorCode": 1,
@@ -117,19 +121,19 @@ curl -X POST http://localhost:6789/api/user/login -H "Content-Type: application/
 
 ---
 
-## 📜 License
+## License
 
 Distributed under the **MIT License**.  
 See [`LICENSE`](./LICENSE) for details.
 
 ---
 
-## 👨‍💻 Author
+## Author
 
 **Miguel Magno**  
 Back-end developer passionate about clean architecture and DDD.  
-📧 [miguelmagnofn123@gmail.com](mailto:miguelmagnofn123@gmail.com)  
-💼 [GitHub - Miguel0101](https://github.com/Miguel0101)
+[miguelmagnofn123@gmail.com](mailto:miguelmagnofn123@gmail.com)  
+[GitHub - Miguel0101](https://github.com/Miguel0101)
 
 ---
 
