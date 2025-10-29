@@ -13,11 +13,11 @@ using TodoX.Infrastructure.Users.Repositories;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
-namespace TodoX.Infrastructure;
+namespace TodoX.Infrastructure.Extensions.DependencyInjection;
 
-public static class ConfigureServices
+public static class ServiceCollectionExtensions
 {
-    public static void AddInfrastructure(this IServiceCollection services, JwtConfiguration jwtConfiguration, Action<DbContextOptionsBuilder> configureOptions)
+    public static IServiceCollection AddInfrastructure(this IServiceCollection services, JwtConfiguration jwtConfiguration, Action<DbContextOptionsBuilder> configureOptions)
     {
         if (services == null)
             throw new ArgumentNullException(nameof(services), "Services cannot be null.");
@@ -55,5 +55,7 @@ public static class ConfigureServices
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<ITodoListRepository, TodoListRepository>();
         services.AddScoped<ITodoItemRepository, TodoItemRepository>();
+
+        return services;
     }
 }
