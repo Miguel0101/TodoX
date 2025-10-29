@@ -11,18 +11,18 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
     {
         builder.HasKey(u => u.Id);
 
-        builder.Property(e => e.Name)
+        builder.Property(u => u.Name)
                .HasConversion(name => name!.Value, value => Name.Create(value))
                .HasColumnName("Name")
                .IsRequired()
                .HasMaxLength(Name.MaxLength);
 
-        builder.Property(e => e.Email)
+        builder.Property(u => u.Email)
                .HasConversion(email => email!.Value, value => Email.Create(value))
                .HasColumnName("Email")
                .IsRequired();
 
-        builder.Property(e => e.Password)
+        builder.Property(u => u.Password)
                .HasConversion(password => password!.HashedValue, hashed => Password.FromHash(hashed))
                .HasColumnName("Password")
                .IsRequired();
