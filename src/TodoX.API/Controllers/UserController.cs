@@ -9,7 +9,7 @@ using TodoX.Application.Users.Services;
 namespace TodoX.API.Controllers;
 
 [ApiController]
-[Route("api/user")]
+[Route("api/auth")]
 public class UserController : ControllerBase
 {
     private readonly IUserService _userService;
@@ -27,7 +27,7 @@ public class UserController : ControllerBase
         switch (response.ErrorCode)
         {
             case ErrorCode.Success:
-                return Created($"/api/user/{response.Result?.Id}", response);
+                return Created($"/api/auth/{response.Result?.Id}", response);
 
             case ErrorCode.UserAlreadyExists:
                 return Conflict(response);
