@@ -2,9 +2,10 @@ TodoX ROADMAP
 
 - API endpoints
   - Users
-    - /api/user/register                          -> POST
-    - /api/user/login                             -> POST
-    - /api/user                                   -> GET
+    - /api/auth/register                          -> POST
+    - /api/auth/login                             -> POST
+    - /api/auth/verify                            -> POST
+    - /api/auth                                   -> GET
 
   - Todo lists
     - /api/todolists                              -> GET

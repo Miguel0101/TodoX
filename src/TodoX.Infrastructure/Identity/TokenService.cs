@@ -5,6 +5,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.Extensions.Options;
 using System.Text;
 using TodoX.Application.Common.Interfaces;
+using System.Security.Cryptography;
 
 namespace TodoX.Infrastructure.Identity;
 
@@ -22,7 +23,7 @@ public class TokenService : ITokenService
     /// </summary>
     /// <param name="user"></param>
     /// <returns>A JWT token string.</returns>
-    public string GenerateToken(User user)
+    public string GenerateJwtToken(User user)
     {
         JwtSecurityTokenHandler handler = new();
 

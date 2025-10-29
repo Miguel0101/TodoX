@@ -37,7 +37,7 @@ public class UserService : IUserService
                 return ResponseDto<TokenDto>.Error(ErrorCode.InvalidPassword, "Invalid password.");
             }
 
-            string token = _tokenService.GenerateToken(user);
+            string token = _tokenService.GenerateJwtToken(user);
 
             TokenDto tokenDto = new()
             {
