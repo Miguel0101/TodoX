@@ -1,6 +1,7 @@
 using System.Text.Json.Serialization;
 using Microsoft.EntityFrameworkCore;
 using TodoX.Application;
+using TodoX.Application.Common.Interfaces;
 using TodoX.Infrastructure;
 using TodoX.Infrastructure.Identity;
 
@@ -38,5 +39,7 @@ app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
+
+Console.WriteLine($"2FA Token: {TokenService.Generate2FAToken()}");
 
 app.Run();
